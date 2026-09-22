@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link href="/style.css" rel="stylesheet">
+      <title>Chat Messages</title>
+</head>
+<body>
+
+  <main class="page">
+    <header class="page-header">
+      <div>
+        <h1>Messages</h1>
+        <p class="subtitle">Your latest conversations</p>
+
+        <form method ='POST' action="/chats/new">
+           <button class="add-button" type="button" onclick="location.href='/chats/new'">+ Add chat</button>
+        </form>
+
+      </div>
+     
+    </header>
+
+    <hr class="divider">
+
+    <section class="chat-grid">
+      <% for (let chat of chats) { %>
+        <article class="chat-card">
+          <p class="chat-label">From: <strong><%= chat.from %></strong></p>
+         <div class="chat-message-container">
+            <p class="chat-message"><%= chat.message %></p>
+          
+            <form method="GET" action="/chats/<%= chat._id %>/edit">
+            <button class="delete-button" type="submit">Edit</button>
+          </form>
+          </div>
+
+          <p class="chat-label">To: <strong><%= chat.to %></strong></p>
+          <p class="chat-time"><%= chat.createdAt %></p>
+        </article>
+      <% } %>
+    </section>
+  </main>
+
+
+
+</body>
+</html>
+
